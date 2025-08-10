@@ -1,13 +1,16 @@
 import React from 'react'
 
-interface User {
+export interface User {
   id: number,
   name: string,
   email: string,
 }
 
 const UsersPage = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users'
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/users`
     //, { cache: `no-store`}
   );
   const users: User[] = await res.json();
@@ -23,12 +26,12 @@ const UsersPage = async () => {
           </tr>
         </thead>
         <tbody>
-        {
-          users.map((user)=> <tr key={user.id}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-          </tr>)
-        }
+          {
+            users.map((user) => <tr key={user.id}>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>)
+          }
         </tbody>
       </table>
     </>
