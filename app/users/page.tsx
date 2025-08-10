@@ -11,7 +11,7 @@ const UsersPage = async () => {
     ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000';
   const res = await fetch(`${baseUrl}/api/users`
-    //, { cache: `no-store`}
+    , { cache: `no-store`}
   );
   const users: User[] = await res.json();
 
