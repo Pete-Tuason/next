@@ -8,7 +8,7 @@ export interface User {
 
 const UsersPage = async () => {
   const baseUrl = process.env.VERCEL_URL
-    ? `https://next-red-three-52.vercel.app`
+    ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000';
   const res = await fetch(`${baseUrl}/api/users`
     , { cache: `no-store`}
@@ -17,7 +17,7 @@ const UsersPage = async () => {
 
   return (
     <>
-      <h1>Users {process.env.VERCEL_URL}</h1>
+      <h1>Users {baseUrl}</h1>
       <table className='table table-bordered'>
         <thead>
           <tr>
